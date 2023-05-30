@@ -59,3 +59,23 @@ def cond_prob(table, evidence, evidence_value, target, target_value):
   
   #return your 2 results in a list
   return prediction
+
+def metrics(a_list):
+  assert isinstance(a_list, list), f'Parameter must be a list'
+  for item in a_list:
+    assert isinstance(item, list), f'Parameter must be a list of lists'
+    assert len(item) == 2, f'Parameter must be a zipped list'
+    for value in item:
+      assert isinstance(value, int), f'All values in the pair must be an integer'
+      assert value >= 0, f'All values in the pair must be greater or equal to 0'
+  TN = sum([1 if pair==[0,0] else 0 for pair in a_list])
+  TP = sum([1 if pair==[1,1] else 0 for pair in a_list])
+  FP = sum([1 if pair==[1,0] else 0 for pair in a_list])
+  FN = sum([1 if pair==[0,1] else 0 for pair in a_list])
+
+  accuracy = sum([p==a for p, a in a_list])/len(a_list)
+  precision = TP/(TP+FP) if TP+FP> 0 else 0
+  recall = TP/(TP+FN) if TP+FN> 0 else 0
+  f1 = 2*precision * recall/(precision + recall) if precision + recall> 0 else 0
+  return {f'Precision': precision, 'Recall': recall, 'F1': f1, 'Accuracy': accuracy}
+
