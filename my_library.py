@@ -65,7 +65,7 @@ def metrics(a_list):
   for item in a_list:
     assert isinstance(item, list), f'Parameter must be a list of lists'
     assert len(item) == 2, f'Parameter must be a zipped list'
-    for value in item:
+  
       
   TN = sum([1 if pair==[0,0] else 0 for pair in a_list])
   TP = sum([1 if pair==[1,1] else 0 for pair in a_list])
