@@ -113,7 +113,7 @@ def try_archs(full_table, target, architectures, thresholds):
   #copy paste code here
   #loop through your architecutes and get results
 
-  for arch in all_architectures:
+  for arch in architectures:
     all_results= up_neural_net(train_table, test_table, arch, target)
   
   #loop for t in thresholds:
